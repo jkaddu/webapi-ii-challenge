@@ -1,10 +1,16 @@
 const express = require('express');
 
-const seedsRouter = ('./seeds/seeds-router.js');
+const cors = require('cors');
+
+const postsRouter = require('./routes/router.js');
 
 const server = express();
 
-server.use(express.json())
+server.use(express.json());
+
+server.use(cors());
+
+server.use('/api/posts', postsRouter);
 
 server.get('/', (req, res) => {
     res.send(`
@@ -12,6 +18,5 @@ server.get('/', (req, res) => {
     `);
 });
 
-// server.use('/api/seeds', seedsRouter);
 
 module.exports = server;
